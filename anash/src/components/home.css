@@ -1,0 +1,32 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* min-height: 50vh; */
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.home-container h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.button {
+    background-color: #c55b11;
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    background-color: #ffffff2d;
+    transform: scale(1.05);
+}

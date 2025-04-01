@@ -1,0 +1,94 @@
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2f3b5252;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  background: #ffffffcf;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  color: #2f3b52;
+}
+
+.login-form h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #e97d0f;
+  /* צבע כותרת תואם */
+}
+
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #e97d0f;
+  /* צבע כפתור תואם */
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-form button:hover {
+  background-color: #d86f0e;
+  /* צבע כפתור בהעברה תואם */
+}
+
+.error-message {
+  color: #ff4d4f;
+  /* צבע הודעת שגיאה תואם */
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* סגנונות עבור מסכים קטנים (טלפונים ניידים) */
+@media (max-width: 600px) {
+  .login-form {
+    padding: 15px;
+    /* הפחתת ריווח */
+  }
+
+  .login-form h2 {
+    font-size: 20px;
+    /* הפחתת גודל הכותרת */
+  }
+
+  .login-form input,
+  .login-form button {
+    font-size: 16px;
+    /* הגדלת גודל הגופן */
+    padding: 12px;
+    /* הגדלת ריווח פנימי */
+  }
+
+  .error-message {
+    font-size: 12px;
+    /* הפחתת גודל הודעת השגיאה */
+  }
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "72b6d415-2e73-45cb-a660-1f450e9ceeb0",
+    "firstName": "חיים",
+    "lastName": "כהן",
+    "fathersName": "משה",
+    "email": "c@c",
+    "phone": "0559999999",
+    "anotherPhone": "",
+    "adress": {
+      "street": "הרצל",
+      "hous": "1",
+      "city": "תל אביב"
+    },
+    "password": "0534193934",
+    "profileImage": "/uploads/1739804927748-1739804446947-640px-ÃÂÃÂÃÂÃÂ_ÃÂÃÂÃÂÃÂ©ÃÂÃÂÃÂÃÂ_-_ÃÂªÃÂÃÂÃÂ ÃÂª_ÃÂ¤ÃÂ¨ÃÂÃÂ¤ÃÂÃÂ_(cropped).jpg"
+  },
+  {
+    "id": "67370410-ebec-47d7-92cf-ea584cbad35a",
+    "firstName": "משה",
+    "lastName": "לוי",
+    "fathersName": "ישראל",
+    "email": "r@g",
+    "phone": "0567890000",
+    "anotherPhone": "",
+    "adress": {
+      "street": "ר' עקיבא",
+      "hous": "7",
+      "city": "בני ברק"
+    },
+    "password": "7",
+    "profileImage": "/uploads/1743508453988-×ª××× ×ª-×¤×¨××¤××-938x580.jpg"
+  },
+  {
+    "id": "e5129caf-1605-4cd2-8ecb-7b674b8d9631",
+    "firstName": "יוסף",
+    "lastName": "רובין",
+    "fathersName": "דוד",
+    "email": "y100@gmail.com",
+    "phone": "0527000000",
+    "anotherPhone": "",
+    "adress": {
+      "street": "נהר הירדן",
+      "hous": "11",
+      "city": "בית שמש"
+    },
+    "password": "123",
+    "profileImage": "/uploads/1743508806402-31c2e2_4349efb575654327b367c14605ca2973~mv2.webp"
+  },
+  {
+    "id": "ef9c4bb8-2e80-4b8d-a782-6b7a77fdf0a6",
+    "firstName": "אהרן",
+    "lastName": "בלוך",
+    "fathersName": "אליהו",
+    "email": "aaa@gmail.com",
+    "phone": "0505000000",
+    "anotherPhone": "0505000001",
+    "adress": {
+      "street": "חפץ חיים",
+      "hous": "12",
+      "city": "מודיעין עילית"
+    },
+    "password": "222",
+    "profileImage": "/uploads/1743508951353-×¦××××_×¤×¨××¤××_1.jpg"
+  }
+]

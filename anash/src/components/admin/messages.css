@@ -1,0 +1,8 @@
+.messages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    flex-wrap: wrap;
+}

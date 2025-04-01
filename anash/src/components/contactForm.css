@@ -1,0 +1,79 @@
+.form-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffffcf;
+  color: #2f3b52;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-container select,
+.form-container textarea,
+.form-container input[type="text"],
+.form-container input[type="number"]
+/* .form-container input[type="file"] */
+ {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-container input:focus,
+.form-container textarea:focus,
+.form-container select:focus {
+  border-color: #e97d0f;
+  outline: none;
+}
+
+.adress {
+  display: flex;
+  gap: 10px;
+}
+
+
+.image-upload {
+  flex: 1 1;
+  border: 2px dashed #e97d0f;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  height: 250px;
+  text-align: center;
+  width: 200px;
+  padding: 17px;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-container button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #e97d0f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #d86f0e;
+}

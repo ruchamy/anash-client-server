@@ -1,0 +1,134 @@
+* {
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #2f3b52;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  /* background-color: #2f3b52; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 10px 20px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  /* צל להפרדה */
+}
+
+.app-header.logged-out {
+  transition: background-color 0.3s ease;
+}
+
+.logo-image {
+  margin: 30px;
+  width: 20vw;
+}
+
+.logo-image.logged-out {
+  width: 90vw;
+  margin-inline: 5vw;
+  transition: opacity 0.3s ease;
+}
+
+.app-nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: #c55b11;
+  color: #fff;
+  flex: 1 1;
+  height: 10vh;
+  align-items: center;
+  margin-top: 3vh;
+  position: relative;
+  z-index: 1;
+}
+
+.app-nav::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 100%;
+  width: 0;
+  height: 0;
+  border-top: 10vh solid transparent;
+  border-right: 20px solid #c55b11;
+  z-index: -1;
+}
+
+.app-nav .app-Link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+}
+
+.app-nav .app-Link:hover {
+  color: #2f3b52;
+}
+
+
+.container {
+  flex: 1;
+  align-items: center;
+  /* text-align: center;
+  font-size: 24px; */
+  color: #e97d0f;
+}
+
+.container.logged-out {
+  color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.app-footer {
+  position: relative;
+  background-color: #2f3b52;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.app-footer div {
+  width: 0;
+  height: 0;
+  border-width: 200px 50vw 200px 50vw;
+  border-style: solid;
+  border-color: transparent #c55b11 #c55b11 #ffffff;
+}
+
+.app-footer p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 400%);
+  padding: 10px 20px;
+  font-weight: bold;
+  width: max-content;
+}
+
+.app-footer a {
+  color: #2f3b52;
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}

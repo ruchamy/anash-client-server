@@ -1,0 +1,75 @@
+.admin-panel {
+  max-width: 1024px; /* הרוחב המקסימלי */
+  width: 90%; /* ברירת מחדל - 90% כדי לאפשר margin במסכים קטנים */
+  min-height: 90vh;
+  padding: 24px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  margin: 0 auto 10vh; /* למרכז + מרווח למעלה ולמטה */
+}
+
+.admin-panel h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 16px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  position: relative; /* כדי למקם את קו התחתי יחסית לכפתורים */
+}
+
+.tab-button {
+  padding: 8px 16px;
+  font-size: 18px;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  background: none;
+  border: none;
+  color: #1f2937;
+  position: relative;
+}
+
+.tab-button.active {
+  color: #3b82f6;
+ }
+ 
+.tab-button::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #3b82f6; /* צבע הקו */
+  transition: width 0.3s ease, left 0.3s ease; /* האנימציה של מעבר הקו */
+}
+
+.tab-button.active::after {
+  width: 100%;
+  left: 0;
+}
+.tab-button:not(.active)::after {
+  width: 0;
+  left: 50%;
+}
+.tab-button:not(.active) {
+  transition: all 0.3s ease; /* התנהגות חלקה גם עבור כפתורים לא פעילים */
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-item {
+  padding: 12px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}

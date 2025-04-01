@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>צ'אט עם מדיה</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #2f3b52;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #chat-container {
+      background: #fff;
+      border-radius: 10px;
+      width: 500px;
+      height: 700px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background: #f5f5f5;
+    }
+
+    .message {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      max-width: 75%;
+    }
+
+    .message.me {
+      background: #e97d0f;
+      color: white;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .message.others {
+      background: #f0f0f0;
+      color: #333;
+      margin-right: auto;
+    }
+
+    #input-container {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: #e8e8e8;
+      border-top: 1px solid #ccc;
+    }
+
+    #message-input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    #upload-btn {
+      margin-left: 10px;
+      background: #e97d0f;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #upload-btn:hover {
+      background: #d76b00;
+    }
+
+    #file-input {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-container">
+    <div id="messages"></div>
+    <div id="input-container">
+      <input type="text" id="message-input" placeholder="הקלד הודעה...">
+      <input type="file" id="file-input" accept="image/*,video/*">
+      <button id="upload-btn" onclick="triggerFileUpload()">+</button>
+      <button onclick="sendMessage()">שלח</button>
+    </div>
+  </div>
+
+  <script>
+    let socket;
+    const username = prompt("מה שמך?");
+    const messagesDiv = document.getElementById('messages');
+    const fileInput = document.getElementById('file-input');
+
+    // התחברות לשרת
+    socket = new WebSocket('ws://localhost:3000');
+
+    socket.onopen = () => console.log('Connected to server');
+
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      if (data.type === 'history') {
+        // היסטוריית הודעות
+        data.messages.forEach(addMessageToUI);
+      } else {
+        // הודעה חדשה
+        addMessageToUI(data);
+      }
+    };
+
+    socket.onclose = () => alert('חיבור לשרת נותק');
+
+    function addMessageToUI(data) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', data.user === username ? 'me' : 'others');
+
+      if (data.type === 'text') {
+        messageDiv.textContent = `${data.user}: ${data.content}`;
+      } else if (data.type === 'file') {
+        const media = document.createElement(data.fileType.startsWith('image') ? 'img' : 'video');
+        media.src = data.content;
+        if (data.fileType.startsWith('video')) media.controls = true;
+        messageDiv.appendChild(media);
+      }
+
+      messagesDiv.appendChild(messageDiv);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('message-input');
+      const message = input.value.trim();
+      if (message) {
+        const data = { type: 'text', user: username, content: message };
+        socket.send(JSON.stringify(data));
+        input.value = '';
+      }
+    }
+
+    function triggerFileUpload() {
+      fileInput.click();
+    }
+
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const data = {
+          type: 'file',
+          user: username,
+          content: reader.result,
+          fileType: file.type,
+        };
+        socket.send(JSON.stringify(data));
+      };
+
+      if (file) reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>

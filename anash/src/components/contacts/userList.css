@@ -1,0 +1,171 @@
+.user-list-page {
+  background-image: url('/public/טלפון\ רקע.jpg');
+  background-attachment: fixed;
+  background-size: 100vw;
+  background-size: cover;
+  color: black;
+  position: relative;
+}
+
+.user-profile {
+  display: flex;
+  height: 33vh;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 5vw;
+  flex-direction: row-reverse;
+}
+
+.user-list-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.user-list-header h1 {
+  font-size: 6rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.filter-container {
+  position: sticky;
+  top: 30px;
+  z-index: 1000;
+  width: 90%;
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.search-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filter-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 200px;
+}
+
+.filter-tag {
+  display: flex;
+  gap: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  /* border-radius: 4px; */
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filter-tag:hover {
+  background-color: #e0e0e0;
+}
+
+.filter-form {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-form input {
+  flex: 2;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.filter-container button {
+  background-color: #c55b11;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  flex: 1;
+}
+
+.filter-form button:hover {
+  background-color: #2f3b52;
+}
+
+.user-list-page-user-card {
+  max-width: 900px;
+  width: 90%;
+}
+
+.search-options-button {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.search-options-button:hover {
+  background-color: #2f3b52;
+  transform: scale(1.01);
+}
+
+/* .user-profile-image {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+} */
+
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #2f3b52;
+  /* padding: 20px; */
+  margin-top: 30px;
+  /* Adjusted to avoid overlap with fixed filter container */
+
+}
+
+/* .user-list-page-user-card{
+  background-color: #fff;
+} */
+.scroll-to-top {
+  background-color: #c55b11;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 3px;
+  cursor: pointer;
+  font-size: 38px;
+  z-index: 1000;
+  font-weight: bold;
+  height: 44px;
+  width: 44px;
+  opacity: 0;
+}
+
+.scroll-to-top.fixed {
+  top: auto;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.scroll-to-top:hover {
+  background-color: #2f3b52;
+}
