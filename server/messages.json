@@ -1,13 +1,11 @@
 [
   {
-    "id": "b90855a0-9fe6-42fb-b5fa-7182c5b5d4af",
+    "id": "7b02e342-8597-4359-ade4-ce0e94d2a6c5",
     "userId": "67370410-ebec-47d7-92cf-ea584cbad35a",
-    "status": "unread",
+    "status": "read",
     "content": {
-      "subject": "editProfile",
-      "message": "",
-      "profileField": "profilePicture",
-      "value": "/uploads/1743507277047-×¦×××× ××¡× 2025-03-31 162430.png"
+      "subject": "",
+      "message": "מה נשמע?\nנראה לך שזה מתאים ל'מרכז'?"
     }
   }
 ]
