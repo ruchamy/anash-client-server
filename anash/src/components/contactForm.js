@@ -113,7 +113,7 @@ const ContactForm = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/messages', {
+      const response = await fetch('https://anash-server.onrender.com/messages', {
         method: 'POST',
         // headers: {
         //   'Content-Type': 'application/json', // חובה כששולחים JSON

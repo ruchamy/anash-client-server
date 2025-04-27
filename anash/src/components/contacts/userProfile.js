@@ -56,7 +56,7 @@ const UserProfile = () => {
     return (
         <div className="user-profile-container">
             <div className="user-profile-header">
-                <img src={`http://localhost:3000${loggedInUser.profileImage}`} className="user-profile-image" alt='profileImage' />
+                <img src={`https://anash-server.onrender.com${loggedInUser.profileImage}`} className="user-profile-image" alt='profileImage' />
                 <h3><strong><FaUser /></strong>{`${loggedInUser.firstName} ב"ר ${loggedInUser.fathersName} ${loggedInUser.lastName}`}</h3>
             </div>
             <div className="user-profile-body">

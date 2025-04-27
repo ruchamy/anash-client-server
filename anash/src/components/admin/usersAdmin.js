@@ -44,7 +44,7 @@ const UsersAdmin = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:3000/contacts');
+      const response = await fetch('https://anash-server.onrender.com/contacts');
       if (!response.ok) throw new Error('Failed to fetch users');
       const data = await response.json();
       await setUsers(data);
@@ -55,7 +55,7 @@ const UsersAdmin = () => {
   }
 
   const handleApprove = async (id) => {
-    await fetch("http://localhost:3000/approved-users", {
+    await fetch("https://anash-server.onrender.com/approved-users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }),
@@ -72,7 +72,7 @@ const UsersAdmin = () => {
     if (confirm) {
       try {
         // שליחת הנתונים לשרת
-        const response = await fetch(`http://localhost:3000/contacts/${userIdToDelete}`, {
+        const response = await fetch(`https://anash-server.onrender.com/contacts/${userIdToDelete}`, {
           method: 'delete',
         });
 

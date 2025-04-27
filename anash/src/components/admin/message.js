@@ -14,7 +14,7 @@ const Message = ({ message, deleteMessage }) => {
         setShowUser(!showUser);
         if (user) return;
         try {
-            const response = await fetch(`http://localhost:3000/contacts/${userId}`);
+            const response = await fetch(`https://anash-server.onrender.com/contacts/${userId}`);
             if (!response.ok) throw new Error('Failed to fetch user');
             const data = await response.json();
             console.log(data);
@@ -26,7 +26,7 @@ const Message = ({ message, deleteMessage }) => {
     const markAsRead = async () => {
         const newStatus = status === 'unread' ? 'read' : 'unread';
         try {
-            const response = await fetch(`http://localhost:3000/messages/${message.id}`, {
+            const response = await fetch(`https://anash-server.onrender.com/messages/${message.id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus }),
@@ -49,7 +49,7 @@ const Message = ({ message, deleteMessage }) => {
                             {message.content.profileField === 'firstName' ? 'שם פרטי' : message.content.profileField === 'lastName' ? 'שם משפחה' : message.content.profileField === 'email' ? 'מייל' : message.content.profileField === 'phone' ? 'טלפון' : message.content.profileField === 'anotherPhone' ? 'טלפון נוסף' : message.content.profileField === 'adress' ? 'כתובת' : message.content.profileField === 'profilePicture' ? 'תמונה' : message.content.profileField} : </p>
                         <p className="value">
                             {message.content.profileField === 'profilePicture' ?
-                                <img className="value-img" src={`http://localhost:3000${message.content.value}` || '/logo512.png'} alt="תמונת פרופיל"/>
+                                <img className="value-img" src={`https://anash-server.onrender.com/${message.content.value}` || '/logo512.png'} alt="תמונת פרופיל"/>
                                 : message.content.profileField === 'adress' ?
                                     message.content.value.street + ' ' + message.content.value.hous + ' ' + message.content.value.city
                                     : message.content.value}

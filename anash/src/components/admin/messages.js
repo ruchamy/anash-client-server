@@ -20,7 +20,7 @@ const Messages = () => {
 
     const fetchMessages = async () => {
         try {
-            const response = await fetch('http://localhost:3000/messages');
+            const response = await fetch('https://anash-server.onrender.com/messages');
             if (!response.ok) throw new Error('Failed to fetch messages');
             const data = await response.json();
             console.log(data);
@@ -33,7 +33,7 @@ const Messages = () => {
 
     const deleteMessage = async (messageId) => {
         try {
-            const response = await fetch(`http://localhost:3000/messages/${messageId}`, {
+            const response = await fetch(`https://anash-server.onrender.com/messages/${messageId}`, {
                 method: 'DELETE',
             });
             if (!response.ok) throw new Error('Failed to delete message');
