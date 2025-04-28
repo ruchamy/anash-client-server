@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "status": "active",
+        "image": "https://example.com/ad1.jpg",
+        "link": "https://example.com/ad1",
+        "description": "This is the first ad description.",
+        "start_date": "2023-01-01",
+        "end_date": "2023-01-31"
+    },
+    {
+        "id": 2,
+        "status": "inactive",
+        "image": "https://example.com/ad2.jpg",
+        "link": "https://example.com/ad2",
+        "description": "This is the second ad description.",
+        "start_date": "2023-02-01",
+        "end_date": "2023-02-28"
+    },
+    {
+        "id": 3,
+        "status": "active",
+        "image": "https://example.com/ad3.jpg",
+        "link": "https://example.com/ad3",
+        "description": "This is the third ad description.",
+        "start_date": "2023-03-01",
+        "end_date": "2023-03-31"
+    },
+    {
+        "id": 4,
+        "status": "inactive",
+        "image": "https://example.com/ad4.jpg",
+        "link": "https://example.com/ad4",
+        "description": "This is the fourth ad description.",
+        "start_date": "2023-04-01",
+        "end_date": "2023-04-30"
+    }
+]

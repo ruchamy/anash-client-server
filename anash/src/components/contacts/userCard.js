@@ -29,7 +29,7 @@ const UserCard = ({
     <div className="user-card">
       <div className="user-card-header">
         <img
-          src={`http://localhost:3000${profileImage}` || '/logo512.png'}
+          src={`https://anash-server.onrender.com${profileImage}` || '/logo512.png'}
           alt={`${firstName} ${lastName}`}
           className="user-card-image"
         />

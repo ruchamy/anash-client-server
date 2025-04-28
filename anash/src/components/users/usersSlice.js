@@ -6,7 +6,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 export const fetchApprovedUsers = createAsyncThunk(
     "users/fetchApprovedUsers",
     async () => {
-        const response = await fetch("http://localhost:3000/approved-users");
+        const response = await fetch("https://anash-server.onrender.com/approved-users");
         return await response.json();
     }
 );
@@ -16,7 +16,7 @@ export const fetchApprovedUsers = createAsyncThunk(
 export const removeApprovedUser = createAsyncThunk(
     "users/removeApprovedUser",
     async (id) => {
-        await fetch(`http://localhost:3000/approved-users/${id}`, {
+        await fetch(`https://anash-server.onrender.com/approved-users/${id}`, {
             method: "DELETE",
         });
         return id;

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import UserCard from "../contacts/userCard";
+import UserCard from "../../contacts/userCard";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import './message.css';
-import RegistrationForm from "../users/registrationForm";
+import RegistrationForm from "../../users/registrationForm";
 import { FaRegCopy } from "react-icons/fa";
 const Message = ({ message, deleteMessage }) => {
     const [user, setUser] = useState(null);

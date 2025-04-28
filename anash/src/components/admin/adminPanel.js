@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./adminPanel.css";
-import Messages from "./messages";
-import UsersAdmin from "./usersAdmin";
+import Messages from "./messages/messages";
+import UsersAdmin from "./users/usersAdmin";
+import AdsAdmin from "./ads/ads";
 
 const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState("users");
@@ -9,7 +10,7 @@ const AdminPanel = () => {
   const tabs = [
     { id: "users", label: "ניהול משתמשים", component: <UsersAdmin /> },
     { id: "messages", label: "מכתבים", component: <Messages /> },
-    { id: "ads", label: "ניהול פרסומות", component: <div>תוכן ניהול פרסומות</div> },
+    { id: "ads", label: "ניהול פרסומות", component:<AdsAdmin/>},
   ];
   return (
     <div className="admin-panel">

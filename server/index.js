@@ -7,12 +7,14 @@ const nodemailer = require('nodemailer');
 
 const multer = require('multer');
 const path = require('path');
+const { start } = require('repl');
 
 const app = express();
 const PORT = 3000;
 const CONTACTS_DATA_FILE = 'contacts.json';
 const APPROVED_USERS_FILE = 'approvedUsers.json';
 const MESSAGES_DATA_FILE = 'messages.json';
+const ADS_DATA_FILE = 'ads.json';
 
 // Middleware
 app.use(express.json());
@@ -66,6 +68,17 @@ const readMessages = () => {
 const writeMessages = (messages) => {
   fs.writeFileSync(MESSAGES_DATA_FILE, JSON.stringify(messages, null, 2));
 };
+
+// Helper function to read/write ads JSON file
+const readAds = () => {
+  if (!fs.existsSync(ADS_DATA_FILE)) {
+    return [];
+  }
+  return JSON.parse(fs.readFileSync(ADS_DATA_FILE, 'utf-8'));
+};
+const writeAds = (ads) => {
+  fs.writeFileSync(ADS_DATA_FILE, JSON.stringify(ads, null, 2));
+}
 
 // Configure the email transporter
 const transporter = nodemailer.createTransport({
@@ -336,6 +349,83 @@ app.delete('/messages/:id', (req, res) => {
   res.json(deletedMessage);
 });
 
+
+//get all ads
+app.get('/ads', (req, res) => {
+  const ads = readAds();
+  res.json(ads);
+});
+//get a single ad by ID
+app.get('/ads/:id', (req, res) => {
+  const ads = readAds();
+  const ad = ads.find((a) => a.id === req.params.id);
+  if (!ad) {
+    return res.status(404).json({ message: 'Ad not found' });
+  }
+  res.json(ad);
+});
+//create a new ad
+app.post('/ads', upload.single('adImage'), (req, res) => {
+  const ads = readAds();
+  const newAd = {
+    id: uuidv4(),
+    status: req.body.status,
+    image: req.file ? `/uploads/${req.file.filename}` : null,
+    link: req.body.Link,
+    destination: req.body.destination,
+    start_date: req.body.start_date,
+    end_date: req.body.end_date,
+  };
+  ads.push(newAd);
+  writeAds(ads);
+  res.status(201).json(newAd);
+});
+
+//update an existing ad
+app.put('/ads/:id', upload.single('adImage'), (req, res) => {
+  const ads = readAds();
+  const adIndex = ads.findIndex((a) => a.id === req.params.id);
+  if (adIndex === -1) {
+    return res.status(404).json({ message: 'Ad not found' });
+  }
+  //אם משתמש מעדכן תמונה, כדאי למחוק את התמונה הישנה מתיקיית ההעלאות:
+  if (req.file && ads[adIndex].image) {
+    const oldPath = path.join(__dirname, ads[adIndex].image);
+    fs.unlinkSync(oldPath);
+  }
+
+  const updatedAd = {
+    ...ads[adIndex],
+    status: req.body.status || ads[adIndex].status,
+    image: req.file ? `/uploads/${req.file.filename}` : ads[adIndex].image,
+    link: req.body.Link || ads[adIndex].link,
+    destination: req.body.destination || ads[adIndex].destination,
+    start_date: req.body.start_date || ads[adIndex].start_date,
+    end_date: req.body.end_date || ads[adIndex].end_date,
+  };
+
+  ads[adIndex] = updatedAd;
+  writeAds(ads);
+  res.json(updatedAd);
+});
+
+//delete an ad
+app.delete('/ads/:id', (req, res) => {
+  const ads = readAds();
+  const adIndex = ads.findIndex((a) => a.id === req.params.id);
+  if (adIndex === -1) {
+    return res.status(404).json({ message: 'Ad not found' });
+  }
+  const deletedAd = ads.splice(adIndex, 1)[0];
+  if (deletedAd.image) {
+    fs.unlinkSync(path.join(__dirname, deletedAd.image), err => {
+      if (err)
+        console.log('Failed to delete image:', err);
+    });
+  }
+  writeAds(ads);
+  res.json(deletedAd);
+});
 
 // Send an email
 app.post('/send-email', async (req, res) => {

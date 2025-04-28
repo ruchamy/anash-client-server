@@ -48,7 +48,7 @@ const RegistrationForm = ({ user, Cancel }) => {
       });
 
       if (user.profilePicture) {
-        setImagePreview(`http://localhost:3000/${user.profilePicture}`);
+        setImagePreview(`https://anash-server.onrender.com/${user.profilePicture}`);
       }
     }
   }, [user]);
@@ -135,7 +135,7 @@ const RegistrationForm = ({ user, Cancel }) => {
       let response;
       if (isEditMode) {
         // עדכון משתמש קיים
-        response = await fetch(`http://localhost:3000/contacts/${user.id}`, {
+        response = await fetch(`https://anash-server.onrender.com/contacts/${user.id}`, {
           method: 'PUT', // עדכון משתמש
           body: formDataToSend,
         });
@@ -150,7 +150,7 @@ const RegistrationForm = ({ user, Cancel }) => {
         setAlert(() => ({ message: 'פרטי המשתמש עודכנו בהצלחה', onClose: () => { Cancel(); setAlert(null); } }));
       } else {
         // רישום משתמש חדש
-        response = await fetch('http://localhost:3000/contacts', {
+        response = await fetch('https://anash-server.onrender.com/contacts', {
           method: 'POST',
           body: formDataToSend,
         });

@@ -1,0 +1,24 @@
+.ad-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .ad-buttons button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .ad-buttons button:first-child {
+    background-color: #10b981; /* כפתור שנה סטטוס */
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #ef4444; /* כפתור מחיקה אדום */
+    color: white;
+  }
+  

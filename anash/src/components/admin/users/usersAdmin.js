@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './usersAdmin.css';
-import { approveNewUser, deleteUser } from '../users/usersSlice';
-import UserCard from '../contacts/userCard';
-import RegistrationForm from '../users/registrationForm';
+import { approveNewUser } from '../../users/usersSlice';
+import UserCard from '../../contacts/userCard';
+import RegistrationForm from '../../users/registrationForm';
 import { useNavigate } from 'react-router-dom';
-import Messages from './messages';
-import AlertBox from '../alertBox';
+import AlertBox from '../../alertBox';
 
 const UsersAdmin = () => {
   const dispatch = useDispatch();
@@ -55,7 +54,7 @@ const UsersAdmin = () => {
   }
 
   const handleApprove = async (id) => {
-    await fetch("http://localhost:3000/approved-users", {
+    await fetch("https://anash-server.onrender.com/approved-users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id }),
@@ -72,7 +71,7 @@ const UsersAdmin = () => {
     if (confirm) {
       try {
         // שליחת הנתונים לשרת
-        const response = await fetch(`http://localhost:3000/contacts/${userIdToDelete}`, {
+        const response = await fetch(`https://anash-server.onrender.com/contacts/${userIdToDelete}`, {
           method: 'delete',
         });
 
