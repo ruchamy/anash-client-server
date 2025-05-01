@@ -83,17 +83,6 @@ const AdsAdmin = () => {
     }
   };
 
-  const deleteAd = async (id) => {
-    if (!window.confirm("בטוח שאתה רוצה למחוק?")) return;
-    try {
-      await fetch(`https://anash-server.onrender.com/ads/${id}`, {
-        method: "DELETE",
-      });
-      fetchAds();
-    } catch (error) {
-      console.error("שגיאה במחיקה:", error);
-    }
-  };
   const handleAlertClose = async (confirmed) => {
     if (confirmed && adToDelete) {
       try {
@@ -108,7 +97,7 @@ const AdsAdmin = () => {
     setShowAlert(false);
     setAdToDelete(null);
   };
-  
+
 
   return (
     <div className="ads-admin">
@@ -162,14 +151,11 @@ const AdsAdmin = () => {
       <div className="ads-list">
         {ads.map((ad) => (
           <div key={ad.id} className="ad-item">
-            //the image is a link of ad.link
             <a href={ad.link} target="_blank" rel="noopener noreferrer">
               <img src={ad.image} alt={ad.description} className="ad-image" />
             </a>
-            <img src={ad.image} alt={ad.description} className="ad-image" />
             <div className="ad-details">
-              <p><strong>לינק:</strong> {ad.link}</p>
-              <p><strong>תאור</strong> {ad.description}</p>
+              <p> {ad.description}</p>
               <p><strong>סטטוס:</strong> {ad.status === "active" ? "פעיל" : "לא פעיל"}</p>
               <p><strong>תוקף:</strong> {ad.start_date} - {ad.end_date}</p>
               <div className="ad-buttons">
@@ -188,12 +174,12 @@ const AdsAdmin = () => {
         ))}
       </div>
       {showAlert && (
-  <AlertBox
-    message="האם אתה בטוח שברצונך למחוק את הפרסומת?"
-    showCancel={true}
-    onClose={handleAlertClose}
-  />
-)}
+        <AlertBox
+          message="האם אתה בטוח שברצונך למחוק את הפרסומת?"
+          showCancel={true}
+          onClose={handleAlertClose}
+        />
+      )}
     </div>
   );
 };

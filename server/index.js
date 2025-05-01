@@ -366,7 +366,7 @@ app.get('/ads/:id', (req, res) => {
 });
 
 //create a new ad
-app.post('/ads', upload.single('adImage'), (req, res) => {
+app.post('/ads', upload.single('imade'), (req, res) => {
   const ads = readAds();
   const newAd = {
     id: uuidv4(),
