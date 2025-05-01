@@ -161,7 +161,7 @@ const AdsAdmin = () => {
 
       <div className="ads-list">
         {ads.map((ad) => (
-          <div key={ad._id} className="ad-item">
+          <div key={ad.id} className="ad-item">
             //the image is a link of ad.link
             <a href={ad.link} target="_blank" rel="noopener noreferrer">
               <img src={ad.image} alt={ad.description} className="ad-image" />
@@ -173,7 +173,7 @@ const AdsAdmin = () => {
               <p><strong>סטטוס:</strong> {ad.status === "active" ? "פעיל" : "לא פעיל"}</p>
               <p><strong>תוקף:</strong> {ad.start_date} - {ad.end_date}</p>
               <div className="ad-buttons">
-                <button onClick={() => toggleAdStatus(ad._id)}>
+                <button onClick={() => toggleAdStatus(ad.id)}>
                   שנה סטטוס
                 </button>
                 <button onClick={() => {

@@ -410,6 +410,23 @@ app.put('/ads/:id', upload.single('adImage'), (req, res) => {
   res.json(updatedAd);
 });
 
+//update an existing ad status
+app.patch('/ads/:id/toggle', (req, res) => {
+  const ads = readAds();
+  const adIndex = ads.findIndex((a) => a.id === req.params.id);
+  if (adIndex === -1) {
+    return res.status(404).json({ message: 'Ad not found' });
+  }
+  const updatedAd = {
+    ...ads[adIndex],
+    status: ads[adIndex].status==="active" ? "inactive" : "active",
+  };
+
+  ads[adIndex] = updatedAd;
+  writeAds(ads);
+  res.json(updatedAd);
+});
+
 //delete an ad
 app.delete('/ads/:id', (req, res) => {
   const ads =  readAds();
