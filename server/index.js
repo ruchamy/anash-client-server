@@ -364,6 +364,7 @@ app.get('/ads/:id', (req, res) => {
   }
   res.json(ad);
 });
+
 //create a new ad
 app.post('/ads', upload.single('adImage'), (req, res) => {
   const ads = readAds();
@@ -372,7 +373,7 @@ app.post('/ads', upload.single('adImage'), (req, res) => {
     status: req.body.status,
     image: req.file ? `/uploads/${req.file.filename}` : null,
     link: req.body.Link,
-    destination: req.body.destination,
+    description: req.body.description,
     start_date: req.body.start_date,
     end_date: req.body.end_date,
   };
@@ -399,7 +400,7 @@ app.put('/ads/:id', upload.single('adImage'), (req, res) => {
     status: req.body.status || ads[adIndex].status,
     image: req.file ? `/uploads/${req.file.filename}` : ads[adIndex].image,
     link: req.body.Link || ads[adIndex].link,
-    destination: req.body.destination || ads[adIndex].destination,
+    description: req.body.description || ads[adIndex].description,
     start_date: req.body.start_date || ads[adIndex].start_date,
     end_date: req.body.end_date || ads[adIndex].end_date,
   };
@@ -411,10 +412,10 @@ app.put('/ads/:id', upload.single('adImage'), (req, res) => {
 
 //delete an ad
 app.delete('/ads/:id', (req, res) => {
-  const ads = readAds();
+  const ads =  readAds();
   const adIndex = ads.findIndex((a) => a.id === req.params.id);
   if (adIndex === -1) {
-    return res.status(404).json({ message: 'Ad not found' });
+    return res.status(404).json({ message: 'Ad not found' , ads: ads, id: req.params.id});
   }
   const deletedAd = ads.splice(adIndex, 1)[0];
   if (deletedAd.image) {

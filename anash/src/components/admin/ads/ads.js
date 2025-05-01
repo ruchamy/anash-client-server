@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
-import "./ads.css";
-import axios from "axios";
+import AlertBox from "../../alertBox"; // נתיב לפי הפרויקט שלך
+import "./ads.css"; // נתיב לפי הפרויקט שלך
+
 
 const AdsAdmin = () => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [adToDelete, setAdToDelete] = useState(null);
   const [ads, setAds] = useState([]);
   const [newAd, setNewAd] = useState({
-    image: "",
-    name: "",
-    phone: "",
+    status: "inactive",
+    image: null,
+    link: "",
+    description: "",
+    start_date: "",
+    end_date: "",
   });
 
   const fetchAds = async () => {
     try {
-      const response = await axios.get("https://anash-server.onrender.com/ads");
-      setAds(response.data);
+      const response = await fetch("https://anash-server.onrender.com/ads");
+      const data = await response.json();
+      setAds(data);
     } catch (error) {
-        setAds( [    {
-            image: "",
-            name: "",
-            phone: "",
-          }]);
       console.error("שגיאה בטעינת פרסומות:", error);
     }
   };
@@ -29,14 +31,41 @@ const AdsAdmin = () => {
   }, []);
 
   const handleInputChange = (e) => {
-    setNewAd({ ...newAd, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setNewAd({ ...newAd, [name]: value });
+  };
+
+  const handleFileChange = (e) => {
+    setNewAd({ ...newAd, image: e.target.files[0] });
   };
 
   const handleAddAd = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("status", newAd.status);
+    formData.append("Link", newAd.link);
+    formData.append("description", newAd.description);
+    formData.append("start_date", newAd.start_date);
+    formData.append("end_date", newAd.end_date);
+
+    if (newAd.image) {
+      formData.append("image", newAd.image);
+    }
+
     try {
-      await axios.post("https://anash-server.onrender.com/ads", newAd);
-      setNewAd({ image: "", name: "", phone: "" });
+      await fetch("https://anash-server.onrender.com/ads", {
+        method: "POST",
+        body: formData,
+      });
+      setNewAd({
+        status: "inactive",
+        image: null,
+        link: "",
+        description: "",
+        start_date: "",
+        end_date: "",
+      });
       fetchAds();
     } catch (error) {
       console.error("שגיאה בהוספת פרסומת:", error);
@@ -45,7 +74,9 @@ const AdsAdmin = () => {
 
   const toggleAdStatus = async (id) => {
     try {
-      await axios.patch(`https://anash-server.onrender.com/ads/${id}/toggle`);
+      await fetch(`https://anash-server.onrender.com/ads/${id}/toggle`, {
+        method: "PATCH",
+      });
       fetchAds();
     } catch (error) {
       console.error("שגיאה בשינוי סטטוס:", error);
@@ -53,62 +84,102 @@ const AdsAdmin = () => {
   };
 
   const deleteAd = async (id) => {
-    if (!window.confirm("אתה בטוח שברצונך למחוק את הפרסומת?")) return;
+    if (!window.confirm("בטוח שאתה רוצה למחוק?")) return;
     try {
-      await axios.delete(`https://anash-server.onrender.com/ads/${id}`);
+      await fetch(`https://anash-server.onrender.com/ads/${id}`, {
+        method: "DELETE",
+      });
       fetchAds();
     } catch (error) {
-      console.error("שגיאה במחיקת פרסומת:", error);
+      console.error("שגיאה במחיקה:", error);
     }
   };
+  const handleAlertClose = async (confirmed) => {
+    if (confirmed && adToDelete) {
+      try {
+        await fetch(`https://anash-server.onrender.com/ads/${adToDelete}`, {
+          method: "DELETE",
+        });
+        fetchAds();
+      } catch (error) {
+        console.error("שגיאה במחיקה:", error);
+      }
+    }
+    setShowAlert(false);
+    setAdToDelete(null);
+  };
+  
 
   return (
     <div className="ads-admin">
       <h2>ניהול פרסומות</h2>
 
-      {/* טופס הוספת פרסומת */}
-      <form onSubmit={handleAddAd} className="ad-form">
+      <form onSubmit={handleAddAd} className="ad-form" encType="multipart/form-data">
         <input
-          type="text"
+          type="file"
           name="image"
-          placeholder="קישור לתמונה"
-          value={newAd.image}
+          accept="image/*"
+          onChange={handleFileChange}
+          required
+        />
+        <select name="status" value={newAd.status} onChange={handleInputChange}>
+          <option value="active">פעיל</option>
+          <option value="inactive">לא פעיל</option>
+        </select>
+        <input
+          type="text"
+          name="link"
+          placeholder="קישור"
+          value={newAd.link}
           onChange={handleInputChange}
           required
         />
         <input
           type="text"
-          name="name"
-          placeholder="שם המפרסם"
-          value={newAd.name}
+          name="description"
+          placeholder="תאור"
+          value={newAd.description}
           onChange={handleInputChange}
           required
         />
         <input
-          type="text"
-          name="phone"
-          placeholder="טלפון"
-          value={newAd.phone}
+          type="date"
+          name="start_date"
+          value={newAd.start_date}
+          onChange={handleInputChange}
+          required
+        />
+        <input
+          type="date"
+          name="end_date"
+          value={newAd.end_date}
           onChange={handleInputChange}
           required
         />
         <button type="submit">הוסף פרסומת</button>
       </form>
 
-      {/* רשימת פרסומות קיימות */}
       <div className="ads-list">
         {ads.map((ad) => (
           <div key={ad._id} className="ad-item">
-            <img src={ad.image} alt={ad.name} className="ad-image" />
+            //the image is a link of ad.link
+            <a href={ad.link} target="_blank" rel="noopener noreferrer">
+              <img src={ad.image} alt={ad.description} className="ad-image" />
+            </a>
+            <img src={ad.image} alt={ad.description} className="ad-image" />
             <div className="ad-details">
-              <p><strong>שם:</strong> {ad.name}</p>
-              <p><strong>טלפון:</strong> {ad.phone}</p>
-              <p><strong>סטטוס:</strong> {ad.active ? "פעיל" : "לא פעיל"}</p>
+              <p><strong>לינק:</strong> {ad.link}</p>
+              <p><strong>תאור</strong> {ad.description}</p>
+              <p><strong>סטטוס:</strong> {ad.status === "active" ? "פעיל" : "לא פעיל"}</p>
+              <p><strong>תוקף:</strong> {ad.start_date} - {ad.end_date}</p>
               <div className="ad-buttons">
                 <button onClick={() => toggleAdStatus(ad._id)}>
                   שנה סטטוס
                 </button>
-                <button onClick={() => deleteAd(ad._id)} className="delete-button">
+                <button onClick={() => {
+                  setAdToDelete(ad.id);
+                  setShowAlert(true);
+                }}>
                   מחק
                 </button>
               </div>
@@ -116,6 +187,13 @@ const AdsAdmin = () => {
           </div>
         ))}
       </div>
+      {showAlert && (
+  <AlertBox
+    message="האם אתה בטוח שברצונך למחוק את הפרסומת?"
+    showCancel={true}
+    onClose={handleAlertClose}
+  />
+)}
     </div>
   );
 };
