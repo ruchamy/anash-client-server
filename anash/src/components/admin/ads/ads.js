@@ -4,9 +4,10 @@ import "./ads.css"; // נתיב לפי הפרויקט שלך
 
 
 const AdsAdmin = () => {
-  const [showAlert, setShowAlert] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [adToDelete, setAdToDelete] = useState(null);
   const [ads, setAds] = useState([]);
+  const [imagePreview, setImagePreview] = useState(null);
   const [newAd, setNewAd] = useState({
     status: "inactive",
     image: null,
@@ -37,6 +38,7 @@ const AdsAdmin = () => {
 
   const handleFileChange = (e) => {
     setNewAd({ ...newAd, image: e.target.files[0] });
+    setImagePreview(URL.createObjectURL( e.target.files[0]));
   };
 
   const handleAddAd = async (e) => {
@@ -52,6 +54,13 @@ const AdsAdmin = () => {
     if (newAd.image) {
       formData.append("image", newAd.image);
     }
+    console.log(formData.get("image")); 
+    console.log(formData.get("status"));
+    console.log(formData.get("Link"));
+    console.log(formData.get("description"));
+    console.log(formData.get("start_date"));
+    console.log(formData.get("end_date"));
+    
 
     try {
       await fetch("https://anash-server.onrender.com/ads", {
@@ -94,7 +103,7 @@ const AdsAdmin = () => {
         console.error("שגיאה במחיקה:", error);
       }
     }
-    setShowAlert(false);
+    setAlert(false);
     setAdToDelete(null);
   };
 
@@ -164,7 +173,7 @@ const AdsAdmin = () => {
                 </button>
                 <button onClick={() => {
                   setAdToDelete(ad.id);
-                  setShowAlert(true);
+                  setAlert(true);
                 }}>
                   מחק
                 </button>
@@ -173,7 +182,8 @@ const AdsAdmin = () => {
           </div>
         ))}
       </div>
-      {showAlert && (
+
+      {alert && (
         <AlertBox
           message="האם אתה בטוח שברצונך למחוק את הפרסומת?"
           showCancel={true}

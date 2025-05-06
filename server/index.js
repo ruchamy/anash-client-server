@@ -371,7 +371,8 @@ app.post('/ads', upload.single('imade'), (req, res) => {
   const newAd = {
     id: uuidv4(),
     status: req.body.status,
-    image: req.file ? `/uploads/${req.file.filename}` : null,
+    // image: req.file ? `/uploads/${req.file.filename}` : null,
+    image: req.body.image ? `/uploads/${req.body.image}` : null,
     link: req.body.Link,
     description: req.body.description,
     start_date: req.body.start_date,

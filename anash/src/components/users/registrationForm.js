@@ -7,7 +7,7 @@ import AlertBox from '../alertBox.js';
 
 
 const RegistrationForm = ({ user, Cancel }) => {
-  const navigate = useNavigate(); // הוספת useNavigate כאן ברכיב React
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [alert, setAlert] = useState(null);
 

@@ -26,15 +26,17 @@ const LoginForm = () => {
     }
 
     setError('');
-    console.log('Login submitted:', formData);
     try {
       const response = await fetch('https://anash-server.onrender.com/contacts', { method: 'GET' });
       if (!response.ok) {
         throw new Error('Failed to get the users');
       }
       const users = await response.json();
-      const approvedUsers = await users.filter(user => approvedUsersId.includes(user.id));
+      const approvedUsers = users.filter(user => approvedUsersId.includes(user.id));
+    console.log(approvedUsersId, approvedUsers);
+    
       const user = await approvedUsers.find(user => user.email === formData.email && user.password === formData.password);
+      
       if (user) {
         dispatch(login(user));
         //check if the user is a manager

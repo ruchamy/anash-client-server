@@ -28,7 +28,7 @@ const savedIsAdmin = sessionStorage.getItem("isAdmin");
 
 const initialState = {
     loggedInUser: savedUser ? JSON.parse(savedUser) : null,
-    approvedUsersID: [],
+    approvedUsersID: fetchApprovedUsers(),
     isAdmin : savedIsAdmin ? (savedIsAdmin === "true") : false
 };
 
