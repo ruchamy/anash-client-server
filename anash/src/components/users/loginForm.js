@@ -27,21 +27,19 @@ const LoginForm = () => {
 
     setError('');
     try {
-      const response = await fetch('https://anash-server.onrender.com/contacts', { method: 'GET' });
+      const response = await fetch('http://localhost:3000/contacts', { method: 'GET' });
       if (!response.ok) {
         throw new Error('Failed to get the users');
       }
       const users = await response.json();
-      const approvedUsers = users.filter(user => approvedUsersId.includes(user.id));
-    console.log(approvedUsersId, approvedUsers);
-    
+      const approvedUsers = users.filter(user => approvedUsersId.includes(user.id));    
       const user = await approvedUsers.find(user => user.email === formData.email && user.password === formData.password);
       
       if (user) {
         dispatch(login(user));
         //check if the user is a manager
         const password = formData.password;
-        const response = await fetch(`https://anash-server.onrender.com/admin-login`, {
+        const response = await fetch(`http://localhost:3000/admin-login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ password }),

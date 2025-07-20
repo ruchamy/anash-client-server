@@ -383,7 +383,7 @@ app.post('/ads', upload.single('image'), (req, res) => {
 });
 
 //update an existing ad
-app.put('/ads/:id', upload.single('adImage'), (req, res) => {
+app.put('/ads/:id', upload.single('image'), (req, res) => {
   const ads = readAds();
   const adIndex = ads.findIndex((a) => a.id === req.params.id);
   if (adIndex === -1) {

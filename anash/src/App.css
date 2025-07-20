@@ -42,8 +42,9 @@ body {
 }
 
 .logo-image.logged-out {
-  width: 90vw;
-  margin-inline: 5vw;
+  width: 50vw;
+  margin-inline: auto;
+  margin-top: 20vh;
   transition: opacity 0.3s ease;
 }
 

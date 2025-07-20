@@ -60,7 +60,6 @@ const ContactForm = () => {
       if (file) {
         setValues(prevValues => ({ ...prevValues, profilePicture: file }));
         setImagePreview(URL.createObjectURL(file));
-        console.log("📂 קובץ נבחר בלחיצה:", file);
       }
     } else if (profileField === 'adress') {
       const field = e.target.name;
@@ -97,9 +96,6 @@ const ContactForm = () => {
       }
     }
 
-    console.log(content);
-    console.log(values);
-
     const dataToSend = new FormData();
     dataToSend.append('userId', loggedInUser.id)
     dataToSend.append('content', JSON.stringify(content));
@@ -108,12 +104,12 @@ const ContactForm = () => {
       dataToSend.append('profileImage', values.profilePicture);
     }
 
-    for (let pair of dataToSend.entries()) {
-      console.log(pair[0] + ':', pair[1]);
-    }
+    // for (let pair of dataToSend.entries()) {
+    //   console.log(pair[0] + ':', pair[1]);
+    // }
 
     try {
-      const response = await fetch('https://anash-server.onrender.com/messages', {
+      const response = await fetch('http://localhost:3000/messages', {
         method: 'POST',
         // headers: {
         //   'Content-Type': 'application/json', // חובה כששולחים JSON
@@ -123,11 +119,9 @@ const ContactForm = () => {
       if (!response.ok) {
         throw new Error('Failed to send the message');
       }
-      console.log('Success:', response);
-
       setAlert(() => ({ message: "ההודעה נשלחה בהצלחה" }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

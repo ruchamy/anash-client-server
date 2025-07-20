@@ -20,7 +20,7 @@
 //   }, [loggedInUser, navigate]);
 //   useEffect(() => {
 //     async function fetchUsers() {
-//       const response = await fetch('https://anash-server.onrender.com/contacts', { method: 'GET' });
+//       const response = await fetch('http://localhost:3000/contacts', { method: 'GET' });
 //       if (!response.ok) {
 //         console.log(new Error('Failed to submit the form'));
 //       }
@@ -101,7 +101,7 @@
 //     <div className="user-list-page">
 //       {loggedInUser != null &&
 //         <div className="user-profile">
-//           <img src={`https://anash-server.onrender.com${loggedInUser.profileImage}`} className="user-profile-image" onClick={() => { setShowUserProfile(!showUserProfile) }} alt='profileImage' />
+//           <img src={`http://localhost:3000${loggedInUser.profileImage}`} className="user-profile-image" onClick={() => { setShowUserProfile(!showUserProfile) }} alt='profileImage' />
 //           {showUserProfile && <UpdateUser />}
 //         </div>}
 //       <div className="user-list-container">
@@ -233,7 +233,7 @@
 //   useEffect(() => {
 //     async function fetchUsers() {
 //       try {
-//         const response = await fetch('https://anash-server.onrender.com/contacts');
+//         const response = await fetch('http://localhost:3000/contacts');
 //         if (!response.ok) throw new Error('Failed to fetch users');
 //         const data = await response.json();
 //         setUsers(data);
@@ -319,7 +319,7 @@
 //       {loggedInUser && (
 //         <div className="user-profile">
 //           <img
-//             src={`https://anash-server.onrender.com${loggedInUser.profileImage}`}
+//             src={`http://localhost:3000${loggedInUser.profileImage}`}
 //             className="user-profile-image"
 //             onClick={() => setShowUserProfile(!showUserProfile)}
 //             alt="profileImage"
@@ -429,7 +429,7 @@ import UserCard from './userCard';
 import './userList.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import UserProfile from './userProfile';
+// import UserProfile from './userProfile';
 import { BsArrowUpCircle } from 'react-icons/bs';
 
 const UserList = () => {
@@ -462,7 +462,7 @@ const UserList = () => {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await fetch('https://anash-server.onrender.com/contacts');
+        const response = await fetch('http://localhost:3000/contacts');
         if (!response.ok) throw new Error('Failed to fetch users');
         const data = await response.json();
         setUsers(data);
@@ -586,7 +586,7 @@ const UserList = () => {
       {/* {loggedInUser && (
         <div className="user-profile">
           {!showUserProfile && <img
-            src={`https://anash-server.onrender.com${loggedInUser.profileImage}`}
+            src={`http://localhost:3000${loggedInUser.profileImage}`}
             className="user-profile-image"
             onClick={() => setShowUserProfile(!showUserProfile)}
             alt="profileImage"
@@ -594,7 +594,7 @@ const UserList = () => {
           {showUserProfile && <UserProfile />}
         </div>
       )} */}
-      <div className='user-list-header' style={{ height: '400px', backgroundColor: '#2f3b52' }}>
+      <div className='user-list-header' style={{ height: '100px', backgroundColor: '#2f3b52' }}>
       </div>
       <div className='user-list-header' style={{ height: '250px' }}>
         <h1>מקושרים...</h1>

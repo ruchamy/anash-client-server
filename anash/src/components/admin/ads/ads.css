@@ -1,24 +1,140 @@
+.ads-admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 20px auto;
+  color: #2f3b52;
+}
+
+.ads-admin h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #e97d0f;
+}
+
+.ad-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+.form-inputs-container {
+  display: flex;
+  gap: 10px;
+}
+.inputs{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ad-image-upload-container {
+    flex: 1 1;
+  border: 2px dashed #e97d0f;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  height: 250px;
+  text-align: center;
+  width: 80px;
+}
+.ad-form input,
+.ad-form select,
+.ad-form button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.date-inputs {
+  display: flex;
+  gap: 10px;
+}
+.date-inputs input {
+  flex: 1;
+}
+
+.ad-form button {
+  background-color: #e97d0f;
+  color: white;
+  cursor: pointer;
+}
+
+.ad-form button:hover {
+  background-color: #d86f0e;
+}
+
+.ads-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.ad-item {
+  background: #ffffffcf;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 250px;
+  text-align: center;
+}
+
+.ad-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 4px solid transparent; /* Default border */
+}
+
+.ad-image.active {
+  border-color: #10b981; /* Green border for active ads */
+}
+
+.ad-image.inactive {
+  border-color: #ef4444; /* Red border for inactive ads */
+}
+
+.ad-details p {
+  margin: 5px 0;
+}
+
 .ad-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .ad-buttons button {
-    padding: 6px 12px;
-    font-size: 14px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .ad-buttons button:first-child {
-    background-color: #10b981; /* כפתור שנה סטטוס */
-    color: white;
-  }
-  
-  .delete-button {
-    background-color: #ef4444; /* כפתור מחיקה אדום */
-    color: white;
-  }
-  
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.ad-buttons button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.ad-buttons button:first-child {
+  background-color: #10b981;
+  color: white;
+}
+
+.ad-buttons button:last-child {
+  background-color: #ef4444;
+  color: white;
+}

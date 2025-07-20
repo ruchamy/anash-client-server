@@ -48,7 +48,7 @@ const RegistrationForm = ({ user, Cancel }) => {
       });
 
       if (user.profilePicture) {
-        setImagePreview(`https://anash-server.onrender.com/${user.profilePicture}`);
+        setImagePreview(`http://localhost:3000/${user.profilePicture}`);
       }
     }
   }, [user]);
@@ -95,7 +95,6 @@ const RegistrationForm = ({ user, Cancel }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     const { password, confirmPassword, profilePicture, ...otherData } = formData;
 
@@ -135,7 +134,7 @@ const RegistrationForm = ({ user, Cancel }) => {
       let response;
       if (isEditMode) {
         // עדכון משתמש קיים
-        response = await fetch(`https://anash-server.onrender.com/contacts/${user.id}`, {
+        response = await fetch(`http://localhost:3000/contacts/${user.id}`, {
           method: 'PUT', // עדכון משתמש
           body: formDataToSend,
         });
@@ -150,7 +149,7 @@ const RegistrationForm = ({ user, Cancel }) => {
         setAlert(() => ({ message: 'פרטי המשתמש עודכנו בהצלחה', onClose: () => { Cancel(); setAlert(null); } }));
       } else {
         // רישום משתמש חדש
-        response = await fetch('https://anash-server.onrender.com/contacts', {
+        response = await fetch('http://localhost:3000/contacts', {
           method: 'POST',
           body: formDataToSend,
         });
@@ -160,7 +159,6 @@ const RegistrationForm = ({ user, Cancel }) => {
         }
 
         const data = await response.json();
-        console.log('Success:', data);
         dispatch(register(data)); // הוספה ל-Redux
         setAlert(() => ({ message: 'הפרטים נשלחו למערכת, בימים הקרובים תקבל הודעה למייל על אישור וסיום הרישום', onClose: () => { setAlert(null); navigate('/'); } }));
 

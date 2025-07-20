@@ -9,16 +9,17 @@ import LoginForm from './components/users/loginForm';
 import RegistrationForm from './components/users/registrationForm';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import ShowAds from './components/showAds';
 
 function App() {
 
   const logedInUser = useSelector(state => state.users.loggedInUser);
   const isAdmin = useSelector(state => state.users.isAdmin);
 
-  useEffect(() => {
-    console.log('logedInUser:', logedInUser);
-  }
-    , [logedInUser]);
+  // useEffect(() => {
+  //   console.log('logedInUser:', logedInUser);
+  // }
+  //   , [logedInUser]);
   return (
     <>
       <header className={`app-header ${logedInUser ? '' : 'logged-out'}`}>
@@ -40,9 +41,11 @@ function App() {
           className={`logo-image` + (logedInUser ? ' logged-in' : ' logged-out')}
         />
       </header>
+      <ShowAds/>
       <div className={`container ${logedInUser ? '' : 'logged-out'}`}>
+        {/* <ShowAds/> */}
         <Routes>
-          <Route path="/" element={logedInUser ? <div><h1>כאן יוצגו פרסומות</h1></div> : <Home />} />
+          <Route path="/" element={logedInUser ? <div></div> : <Home />} />
           <Route path="/temp" element={<UnderConstruction />} />
           <Route path="/chat" element={<iframe src="/chat.html" width="100%" height="600px" />} />
           <Route path="/contacts" element={<UserList />} />
